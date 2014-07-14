@@ -87,11 +87,19 @@ a[n/2] = a[n/2] + 1
 
 HPfiltered = signal.lfilter(a, 1, y) + y[0]
 
+# next, we define a lowpass filter to remove all those painful and unnecessary higher frequencies
+cutOffLow = 10		# the cutoff frequency, in the same units as the following nyquist frequency
+n = 101
+# all other parameters of course remain the same, we are going to experiment with n
+b = signal.firwin(n, cutoff=cutOffLow, window="hamming", nyq=nyquistF)
+LPfiltered = signal.lfilter(b, 1, HPfiltered) 
+
 # spectrum1 = fft(y)
 
 # plot(log10(abs(spectrum1)))
 plot(x[unplotPoints:plotPoints], y[unplotPoints:plotPoints], 'g')
 plot(x[unplotPoints:plotPoints], HPfiltered[unplotPoints:plotPoints], 'b')
+plot(x[unplotPoints:plotPoints], LPfiltered[unplotPoints:plotPoints], 'r')
 show()
 
 
