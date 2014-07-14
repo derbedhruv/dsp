@@ -85,13 +85,13 @@ a = -a
 a[n/2] = a[n/2] + 1
 # mfreqz(a)
 
-filtered = signal.lfilter(a, 1, y) + y[0]
+HPfiltered = signal.lfilter(a, 1, y) + y[0]
 
 # spectrum1 = fft(y)
 
 # plot(log10(abs(spectrum1)))
 plot(x[unplotPoints:plotPoints], y[unplotPoints:plotPoints], 'g')
-plot(x[unplotPoints:plotPoints], filtered[unplotPoints:plotPoints], 'b')
+plot(x[unplotPoints:plotPoints], HPfiltered[unplotPoints:plotPoints], 'b')
 show()
 
 
